@@ -114,6 +114,7 @@ let opponentYArray = Array(3).fill(390);
 
 //controlling movement of player
 document.addEventListener('keydown', (e) => {
+  console.log(playerX, playerY);
    switch (e.keyCode) {
        case 65:
            if(playerX > 5) {
@@ -271,7 +272,7 @@ function senseManager() {
 function senseOpponent() {
     distX = Math.abs(opponentX - playerX);
     distY = Math.abs(opponentY - playerY);
-    if (distX < 100 && distY < 100) {
+    if (distX < 40 && distY < 40) {
         isNearOpponent = true;
     } else {
         isNearOpponent = false;
@@ -653,15 +654,16 @@ function leaveCorner() {
     if (
       valueX == opponentXArray[0] &&
       valueX == opponentXArray[1] &&
-      valueX == opponentXArray[2]
+      valueX == opponentXArray[2] &&
+      Math.abs(playerX - opponentX) < 35
     ) {
       opponentYArray.forEach((valueY) => {
         if (
           valueY == opponentYArray[0] &&
           valueY == opponentYArray[1] &&
-          valueY == opponentYArray[2]
+          valueY == opponentYArray[2] 
         ) {
-          if (opponentY + 10 < 541) {
+          if (opponentY + 10 < 541 ) {
             opponentY += 10;
           } else if (opponentY - 10 > 272) {
             opponentY -= 10;
@@ -677,11 +679,6 @@ function decreaseTime () {
     timerBar.style.width = (seconds * 3.33) + "%";
 }
 
-function gameOver () {
-    clearInterval(matchTimerId);
-}
-
-
 function gameOver() {
   clearInterval(matchTimerId);
   message.innerHTML = "You've completed the game!";
@@ -692,19 +689,19 @@ function gameOver() {
       .removeChild(document.querySelector(".gameContainer").lastChild);
   }
   isGameOver = true;
-  let unroundedScore = (points * (strength / 100)) / 3;
+  let unroundedScore = (points * (1 / 100));
   let finalScore = Math.round(unroundedScore);
   console.log(finalScore);
 
-  if (clout >= 60 && finalScore >= 8) {
+  if (clout >= 60 && finalScore >= 20) {
     message.innerHTML = "You won and you got a sponsorship deal! Well done";
-  } else if (clout >= 60 && finalScore < 8) {
+  } else if (clout >= 60 && finalScore < 20) {
     message.innerHTML =
       "You didn't win but you have so much clout you've been offered your own TV series!";
-  } else if (clout < 60 && finalScore >= 8) {
+  } else if (clout < 60 && finalScore >= 20) {
     message.innerHTML =
       "You lost but you don't have enough clout for people to actually care...";
-  } else if (clout < 60 && finalScore < 8) {
+  } else {
     message.innerHTML =
       "You lost and you don't have enough clout to reach the big leagues...";
   }

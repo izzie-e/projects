@@ -1,26 +1,4 @@
-Game - boxing champion
 
+To do
 
-ring game
-
-- points variable in message, only one round
-- make a timer for 30 secs where days till fight is
-- make new opponent character who moves randomly inside ring but tries to move away from player
-- lose points if player goes outside boundaries
--have to be within range of opponent to press spacebar to punchc
-
-
--clout affects the sponsorship deal at the end
-- strength affects how much you multiply score by
-
-- winning boxing march + 10 clout but can win match and not win sponsorship deal
-
-- increasing clout throughout game also decreases energy
-
-have an isBoxingMatch which triggers everything else
-
-
-
-- the manager clout thing is the only thing you need to write loads for, do a few for each day
-- have 2 clout opportunities each day, where there's nothing manager says come back tomorrow
-
+- change opponent moving
