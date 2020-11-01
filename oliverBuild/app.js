@@ -689,7 +689,7 @@ function gameOver() {
       .removeChild(document.querySelector(".gameContainer").lastChild);
   }
   isGameOver = true;
-  let unroundedScore = (points * (1 / 100));
+  let unroundedScore = (points * (strength / 100));
   let finalScore = Math.round(unroundedScore);
   console.log(finalScore);
 
