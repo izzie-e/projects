@@ -700,7 +700,7 @@ function gameOver() {
       "You didn't win but you have so much clout you've been offered your own TV series!";
   } else if (clout < 60 && finalScore >= 20) {
     message.innerHTML =
-      "You lost but you don't have enough clout for people to actually care...";
+      "You never got enough clout to become famous but you won the match and had a successful career as a coach!";
   } else {
     message.innerHTML =
       "You lost and you don't have enough clout to reach the big leagues...";
