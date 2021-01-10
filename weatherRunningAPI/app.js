@@ -40,7 +40,7 @@ class WeatherAPI {
 
   //loops through hourly data to find when there's rain
   checkForRain(hourlyData) {
-    for (let i = 0; i <= 11; i++) {
+    for (let i = 0; i <= 24; i++) {
       let timeInLoop =
         this.currentTime + i <= 24
           ? this.currentTime + i
