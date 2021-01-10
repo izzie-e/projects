@@ -64,21 +64,34 @@ class WeatherAPI {
       if (hour > sunArray[0] && hour < sunArray[1]) {
         console.log(hour);
         perfectHours.push(hour);
-        console.log(perfectHours);
+        // console.log(perfectHours);
       }
     });
+
     if (perfectHours.length > 0) {
-      this.msg.innerHTML = `It's not raining and it's light at ${perfectHours.join(
-        ", "
-      )}`;
+      this.msg.innerHTML = `It's not raining and it's light at ${this.format(perfectHours)}`;
     } else if (rainFreeHours.length > 0) {
-      this.msg.innerHTML = `It's not raining at ${rainFreeHours.join(
-        ", "
-      )} but it'll be dark...`;
-      //use map to go through each element and add a pm or am conditionally
+      this.msg.innerHTML = `It's not raining at ${this.format(rainFreeHours)} but it'll be dark...`;
     } else {
       this.msg.innerHTML = "It's raining for the next 12 hours!";
     }
+  }
+
+  format(hoursArray){
+    let formattedArray = hoursArray.map( hour =>{
+      if (hour > 12) {
+        hour -= 12;
+        hour = " " + hour;
+        hour += "PM";
+      }
+      if (hour <= 12) {
+        hour = " " + hour;
+        hour += "AM";
+      }
+      return hour;
+    })
+    formattedArray.splice(formattedArray.length - 1, 0, " or")
+    return formattedArray
   }
 }
 
