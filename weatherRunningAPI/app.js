@@ -91,7 +91,7 @@ class WeatherAPI {
       return hour;
     })
     formattedArray.splice(formattedArray.length - 1, 0, " or")
-    let newString = formattedArray.toString().replace("or,", "or");
+    let newString = formattedArray.toString().replace("or,", "and");
     return newString;
   }
 }
