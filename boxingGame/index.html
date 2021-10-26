@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card m-2 p-2 text-center">
+            <h1>Boxing Champ</h1>
+        </div>
+        <div class="card m-2 p-2 text-center">
+            <div class="row">
+                <!-- days div -->
+                <div class="col-md-3" id="daysDiv">
+                    <p>Days till fight: </p>
+                    <div><span id="daysNo"></span></div>
+                </div>
+                <!-- match timer div -->
+                <div class="col-md-3" id = "timerDiv">
+                    <p>Time Left in Match:</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100" id ="timerBar"></div>
+                    </div>
+                </div>
+                <!-- end of match timer div -->
+
+                <div class="col-md-3">
+                    <p>Popularity:</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100" id ="cloutBar"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" id= "energyDiv">
+                    <p>Energy:</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100" id ="energyBar"></div>
+                    </div> 
+                </div>
+
+                <div class="col-md-3" id= "punchesDiv">
+                    <p>Punches landed: </p>
+                    <div><span id="pointDisplay"></span></div>
+                </div>
+
+                <div class="col-md-3">
+                    <p>Strength:</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0"
+                            aria-valuemax="100" id ="strengthBar"></div>
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+
+    
+
+    <div class="gameContainer border border-dark">
+            <div id="player"></div>
+
+            <div id="night"></div>
+
+
+            <div class="manager">
+                <p class="managerText">manager</p>
+            </div>
+
+            <div class="treadmill">
+                <p class="treadText">treadmill</p>
+            </div>
+
+            <div class="stretchMat">
+                <p class="stretchText">stretching mat</p>
+            </div>
+
+            <div class="weightArea">
+                <p class="weightText">weights</p>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="border-top border-dark">
+                            <div class="leftWeightCircle"></div>
+                            <div class="rightWeightCircle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="fullStop">.</p>
+                <p class="fullStop"> .</p>
+                <p class="fullStop">.</p>
+
+                <div class="row weightTwo">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="border-top border-dark">
+                            <div class="leftWeightCircle bigCircle" ></div>
+                            <div class="rightWeightCircle bigCircle"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="boxRing">
+                <p class="boxText">boxing ring</p>
+            </div>
+
+            <div class="vendingMachine">
+                <p class="vendingText">vending machine</p>
+            </div>
+
+            <div id="bedArea">
+                <div id="bed">
+                    <p id="bedText">bed</p>
+                </div>
+                <div id="covers"></div>
+            </div>
+        
+        </div>
+
+        <div class="messageBox card text-center">
+            <p id="message" class="p-2 m-2"></p>
+        </div>
+        
+    </div>
+
+    <script type ="module" src="app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
