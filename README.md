@@ -5,7 +5,7 @@ Play as a boxing chamption preparing for the big fight
 https://boxing-champ.netlify.app/
 
 Running API - 
-A project which uses rain and light level to determine the best times to go for a run in london
+A project which uses rain and light level to determine the best times to go for a run in your location
 https://running-api.netlify.app/
 
 Quadratic generator - 
