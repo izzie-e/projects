@@ -1,17 +1,35 @@
 class WeatherAPI {
   constructor() {
     this.msg = document.getElementById("msg");
+    this.colorKey = document.getElementById("colorKey");
+    this.colorKey.style.display = "none";
+    this.init = this.getUserLocation();
     this.rainFreeHours = [];
-    this.request = this.getWeatherData();
+    this.perfectHours = [];
     this.currentTime = this.getTime();
     this.sunArray = [];
   }
-  
-  //fetch request
-  async getWeatherData() {
+  //method that takes callback functions as parameters depending on success or not
+  getUserLocation() {
+    navigator.geolocation.getCurrentPosition(
+      this.successFunction,
+      this.failureFunction
+    );
+  }
+
+  successFunction = (position) => {
+    this.getWeatherData([position.coords.latitude, position.coords.longitude]);
+  };
+
+  failureFunction = () => {
+    this.msg.innerHTML = "We can't access your location data!";
+  };
+
+  //fetch request for weather data
+  async getWeatherData(coords) {
     try {
       const response = await fetch(
-        "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&appid=889db4cd2682f3f9047e5bfe087fc6d4"
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=889db4cd2682f3f9047e5bfe087fc6d4`
       );
       if (!response.ok) {
         throw new Error(response.status);
@@ -35,12 +53,13 @@ class WeatherAPI {
       (sunriseHours * 100 + sunriseMins) / 100,
       (sunsetHours * 100 + sunsetMins) / 100,
     ];
-    this.giveOptions(this.rainFreeHours, this.sunArray);
+    this.getPerfectHours();
+    this.drawToday();
   }
 
   //loops through hourly data to find when there's rain
   checkForRain(hourlyData) {
-    for (let i = 0; i <= 24; i++) {
+    for (let i = 0; i <= 24 - this.currentTime; i++) {
       let timeInLoop =
         this.currentTime + i <= 24
           ? this.currentTime + i
@@ -50,6 +69,16 @@ class WeatherAPI {
       }
     }
   }
+  
+  //selects the hours which are light and free of rain
+  getPerfectHours() {
+    this.rainFreeHours.forEach((hour) => {
+      if (hour > this.sunArray[0] && hour < this.sunArray[1]) {
+        this.perfectHours.push(hour);
+      }
+    });
+  }
+
   //gets the current hour and mins
   getTime() {
     const date = new Date();
@@ -57,45 +86,46 @@ class WeatherAPI {
     return currentTime;
   }
 
-  // writes out the message depending on 
-  giveOptions(rainFreeHours, sunArray) {
-    let perfectHours = [];
-    rainFreeHours.forEach((hour) => {
-      if (hour > sunArray[0] && hour < sunArray[1]) {
-        console.log(hour);
-        perfectHours.push(hour);
-        // console.log(perfectHours);
+  drawToday() {
+    this.colorKey.style.display = "flex";
+    let table = document.getElementById("table");
+    let hoursToBeDisplayed = 24 - this.currentTime;
+    for (let i = 0; i <= hoursToBeDisplayed; i++) {
+      let currentRow = table.insertRow(i);
+      let currentCell = currentRow.insertCell(0);
+      let hour = this.currentTime + i;
+      let suffix = "AM";
+      if (hour > 12 && hour < 24) {
+        hour -= 12;
+        suffix = "PM";
+      } else if (hour == 12 || hour == 24) {
+        hour = hour == 12 ? "Noon" : "Midnight";
+        suffix = "";
       }
-    });
-
-    if (perfectHours.length > 0) {
-      this.msg.innerHTML = `It's not raining and it's light at ${this.format(perfectHours)}`;
-    } else if (rainFreeHours.length > 0) {
-      this.msg.innerHTML = `It's not raining at ${this.format(rainFreeHours)} but it'll be dark...`;
-    } else {
-      this.msg.innerHTML = "It's raining for the next 12 hours!";
+      currentCell.innerHTML = `${hour} ${suffix}`;
+      currentCell.style.backgroundColor = "#118ab2"; //blue
+      this.selectBackground(
+        this.rainFreeHours,
+        this.currentTime + i,
+        "#e0e1dd", //gray
+        currentCell
+      );
+      this.selectBackground(
+        this.perfectHours,
+        this.currentTime + i,
+        "#ffd166", //yellow
+        currentCell
+      );
     }
   }
 
-  format(hoursArray){
-    let formattedArray = hoursArray.map( hour =>{
-      if (hour > 12) {
-        hour -= 12;
-        hour = " " + hour;
-        hour += "PM";
+  selectBackground = (hoursToBeChecked, currentTime, color, currentCell) => {
+    hoursToBeChecked.map((hourToBeChecked) => {
+      if (currentTime == hourToBeChecked) {
+        currentCell.style.backgroundColor = color.toString();
       }
-      if (hour <= 12) {
-        hour = " " + hour;
-        hour += "AM";
-      }
-      return hour;
-    })
-    formattedArray.splice(formattedArray.length - 1, 0, " or")
-    let newString = formattedArray.toString().replace("or,", "and");
-    return newString;
-  }
+    });
+  };
 }
 
 new WeatherAPI();
-
-
