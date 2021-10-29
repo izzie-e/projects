@@ -22,7 +22,7 @@ class WeatherAPI {
   };
 
   failureFunction = () => {
-    this.msg.innerHTML = "We can't access your location data!";
+    this.msg.innerHTML = "We can't access your location data! Make sure the location services are enabled on whichever browser you're using!";
   };
 
   //fetch request for weather data
