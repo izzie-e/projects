@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .item {
+    height: 50%;
+    width: 30%; 
+    -ms-flex-align: center;
+    padding: 5px;
+  }
+
+  #rain {
+      background-color: #118ab2;
+  }
+
+  #perfect {
+    background-color: #ffd166;
+}
+
+#dbd {
+    background-color: #e0e1dd;
+}
